@@ -1,0 +1,2 @@
+General error:
+    docx2pdf is not implemented for linux as it requires Microsoft Word to be installed
