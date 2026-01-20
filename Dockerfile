@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.12-slim
 
 
 WORKDIR /code
@@ -11,6 +11,8 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 
 COPY ./app /code/app
+
+COPY ./generator /code/generator
 
 
 CMD ["fastapi", "run", "app/main.py", "--port", "80"]
