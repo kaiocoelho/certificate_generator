@@ -26,7 +26,7 @@ class CertificateGenerator:
             12: "dezembro"
         }
         try:
-            self.atletas = pd.read_excel(r'../generator/table/atletas.xlsx').dropna(how='all').values.tolist()
+            self.atletas = pd.read_excel(r'/code/generator/table/atletas.xlsx').dropna(how='all').values.tolist()
         except Exception as error:
             print(error)
             return None
@@ -59,14 +59,14 @@ class CertificateGenerator:
 
                 self.certificados.append(info_atleta)
 
-            template = "../generator/model/certificados_modelo.docx"
+            template = "/code/generator/model/certificados_modelo.docx"
             document = MailMerge(template)
             document.merge_pages(self.certificados)
-            document.write('../generator/certificates/certificados_final.docx')
+            document.write('/code/generator/certificates/certificados_final.docx')
             return True
         except Exception as error:
             print(error)
-            with open('../generator/logs/error_log.txt', 'w') as file:
+            with open('/code/generator/logs/error_log.txt', 'w') as file:
                 file.write(
                 f"""General error:
                 {str(error)}

@@ -1,4 +1,5 @@
 # main.py
+import os
 from fastapi import FastAPI, UploadFile, File
 from typing import Annotated
 from generator.generator import CertificateGenerator
@@ -16,7 +17,7 @@ def read_root():
 
 @app.post("/gerar", tags=["Certificados"])
 def read_certificados(file: Annotated[UploadFile, File(...)]):
-    with open(f"../generator/table/atletas.xlsx", "wb") as buffer:
+    with open(f"/code/generator/table/atletas.xlsx", "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
     generator = CertificateGenerator()
@@ -24,14 +25,14 @@ def read_certificados(file: Annotated[UploadFile, File(...)]):
     if result:
         # Return the FileResponse
         return FileResponse(
-            path='../generator/certificates/certificados_final.docx',
+            path='/code/generator/certificates/certificados_final.docx',
             filename='certificados_final.docx', # The name the browser will use for the download
             media_type='application/octet-stream' # Generic media type for binary data
         )
     else:
         # Return the FileResponse
         return FileResponse(
-            path='../generator/logs/error_log.txt',
+            path='/code/generator/logs/error_log.txt',
             filename='error_log.txt', # The name the browser will use for the download
             media_type='application/octet-stream' # Generic media type for binary data
         )
